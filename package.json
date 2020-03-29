@@ -11,5 +11,9 @@
     "url": "?.git"
   },
   "author": "Hayden Lee",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-util": "^3.0.8"
+  }
 }

@@ -2,6 +2,7 @@ var gulp = require('gulp'), // import gulp into this file.
     gutil = require('gulp-util'),  // import gulp-util plugins into this file.
     coffee = require('gulp-coffee'),  // import coffee script plugin
     browserify = require('gulp-browserify'),  // import browserify to load jquery and mustache libraries
+    compass = require('gulp-compass'),  // import Sass and Compass 
     concat = require('gulp-concat');
 
 var coffeeSources = ['components/coffee/tagline.coffee'];
@@ -11,6 +12,7 @@ var jsSources = [
     'components/scripts/tagline.js',
     'components/scripts/template.js'
 ]
+var sassSources = ['components/sass/style.scss'];
 
 gulp.task('coffee', async function() {
     gulp.src(coffeeSources)
@@ -24,6 +26,17 @@ gulp.task('js', async function() {
         .pipe(concat('script.js')) // concatinate all js files to script.js
         .pipe(browserify()) // load jQuery and Mustache libraries
         .pipe(gulp.dest('builds/development/js'))  // send the concatinated file to the destination folder.
+});
+
+gulp.task('compass', async function() {
+    gulp.src(sassSources)
+        .pipe(compass({
+            sass: 'components/sass',
+            image: 'builds/development/images',
+            style: 'expanded'
+        })) 
+        .on('error', gutil.log)
+        .pipe(gulp.dest('builds/development/css'))  // send the file to the destination folder.
 });
 
 /*

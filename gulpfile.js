@@ -1,8 +1,15 @@
 var gulp = require('gulp'), // import gulp into this file.
     gutil = require('gulp-util'),  // import gulp-util plugins into this file.
-    coffee = require('gulp-coffee');  // import coffee script plugin
+    coffee = require('gulp-coffee'),  // import coffee script plugin
+    concat = require('gulp-concat');
 
 var coffeeSources = ['components/coffee/tagline.coffee'];
+var jsSources = [
+    'components/scripts/rclick.js',
+    'components/scripts/pixgrid.js',
+    'components/scripts/tagline.js',
+    'components/scripts/template.js'
+]
 
 gulp.task('coffee', async function() {
     gulp.src(coffeeSources)
@@ -11,9 +18,11 @@ gulp.task('coffee', async function() {
         .pipe(gulp.dest('components/scripts')) // send the file to the destination once the process is done.
 });
 
-gulp.task('message', async function() {
-    console.log("HTTP Server Started");
-  });
+gulp.task('js', async function() {
+    gulp.src(jsSources)
+        .pipe(concat('script.js')) // concatinate all js files to script.js
+        .pipe(gulp.dest('builds/development/js'))  // send the concatinated file to the destination folder.
+});
 
 /*
 gulp.task('log', function() {

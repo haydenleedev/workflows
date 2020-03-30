@@ -47,6 +47,7 @@ gulp.task('watch', function() {
 
 gulp.task('default', gulp.series('coffee', 'js', 'compass', 'watch')); // add series of tasks that we want to execute
 
+
 // Gulp version 4 changed the syntax as below
 // gulp.task('default', gulp.series('sass', 'js', 'watch'));
 // gulp.watch('app/scss/*.scss', gulp.series('sass'));

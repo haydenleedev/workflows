@@ -30,15 +30,20 @@ gulp.task('js', async function() {
 
 gulp.task('compass', async function() {
     gulp.src(sassSources)
-        .pipe(compass({
-            sass: 'components/sass',
-            image: 'builds/development/images',
-            style: 'expanded'
-        })) 
-        .on('error', gutil.log)
-        .pipe(gulp.dest('builds/development/css'))  // send the file to the destination folder.
+      .pipe(compass({
+        sass: 'components/sass',
+        image: 'builds/development/images',
+        style: 'expanded'
+      })
+      .on('error', gutil.log))
+      .pipe(gulp.dest('builds/development/css'))  // send the file to the destination folder.
 });
 
+gulp.task('default', gulp.series('coffee', 'js', 'compass')); // add series of tasks that we want to execute
+
+// Gulp version 4 changed the syntax as below
+// gulp.task('default', gulp.series('sass', 'js', 'watch'));
+// gulp.watch('app/scss/*.scss', gulp.series('sass'));
 /*
 gulp.task('log', function() {
     gutil.log('Workflows are awesome')

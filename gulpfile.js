@@ -41,6 +41,12 @@ gulp.task('compass', async function() {
 
 gulp.task('default', gulp.series('coffee', 'js', 'compass')); // add series of tasks that we want to execute
 
+gulp.task('watch', function() {
+    gulp.watch(coffeeSources, gulp.series('coffee'));  // if something changes in coffeeSources then execute coffee file
+    gulp.watch(jsSources, gulp.series('js')); // if something changes in jsSources then execute js file
+    gulp.watch('components/sass/*.scss', gulp.series('compass')); // Since sassSource is only importing files, we need to add all scss files to be able to watch the changes.
+})
+
 // Gulp version 4 changed the syntax as below
 // gulp.task('default', gulp.series('sass', 'js', 'watch'));
 // gulp.watch('app/scss/*.scss', gulp.series('sass'));
